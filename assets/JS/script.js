@@ -71,11 +71,14 @@ function selectChoice(e) {
     if (correct) {
         userChoices.appendChild(newDiv)
         newDiv.textContent = "Correct!"
+        currentQIndex++;
     } else {
         userChoices.appendChild(newDiv)
         newDiv.textContent = "Wrong!"
         userTime = userTime - deduct;
-    }
+        currentQIndex++;
+    }  
+    showQuestion(questionOrder[currentQIndex])
 }
 
 const questions = [
