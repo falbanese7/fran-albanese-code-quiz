@@ -42,7 +42,6 @@ function revealQuestion() {
     showQuestion(questionOrder[currentQIndex])
 }
 
-
 function showQuestion(questions) {
     currentQ.innerText = questions.question
     questions.answers.forEach(answer => {
