@@ -69,9 +69,9 @@ function resetQuestion() {
 function selectChoice(e) {
     const userSelection = e.target
     const correct = userSelection.dataset.correct
-    revealQuestion(document.body, correct)
+    setStatusClass(document.body, correct)
     Array.from(userChoices.children).forEach(button => {
-        revealQuestion(button, button.dataset.correct)
+        setStatusClass(button, button.dataset.correct)
     })
 }
 
