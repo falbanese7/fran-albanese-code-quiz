@@ -1,149 +1,109 @@
-// Connecting HTML elements to JS
-const startBtn = document.getElementById("start-btn");
-const titleEl = document.getElementById("title-section");
-const gameTime = document.getElementById("game-timer");
-const currentQ = document.getElementById("currentQ");
-const userChoices = document.getElementById("userChoices");
-
-// Time and score variables
-let timeLeft = 50;
-let userTime = 0;
-let deduct = 15; // To penalize user for wrong answer
+const startQuiz = document.getElementById("start-quiz-btn");
+const gameTime = document.getElementById("time-left");
+const gameContainer = document.getElementById("container");
+const questionSect = document.getElementById("questionsBox")
 let score = 0;
-
-let questionOrder, currentQIndex
-
-
-startBtn.addEventListener("click", startQuiz);
-
-function startQuiz() {
-    titleEl.classList.add("hide")
-    currentQ.classList.remove("hide")
-    userChoices.classList.remove("hide")
-    questionOrder = questions.sort(() => Math.random() -.5)
-    currentQIndex = 0
-    if (userTime === 0) {
-        userTime = setInterval(function () {
-            timeLeft--;
-            gameTime.textContent = "Time: " + timeLeft;
-            
-            if (timeLeft <= 0) {
-                clearInterval(userTime);
-                quizEnd();
-                gameTime.textContent = "Time's up!";
-            }
-        },1000);
-    }
-    revealQuestion();
-}
-
-function revealQuestion() {
-    resetQuestion()
-    showQuestion(questionOrder[currentQIndex])
-}
-
-function showQuestion(questions) {
-    currentQ.innerText = questions.question
-    questions.answers.forEach(answer => {
-        const button = document.createElement("button")
-        button.innerText = answer.text
-        button.classList.add('btn-purple-custom')
-        if (answer.correct) {
-            button.dataset.correct = answer.correct
-        }
-        button.addEventListener('click', selectChoice)
-        userChoices.appendChild(button)
-    })
-}
-
-function resetQuestion() {
-    while (userChoices.firstChild) {
-        userChoices.removeChild
-        (userChoices.firstChild)
-    }
-}
-
-function selectChoice(e) {
-    const userSelection = e.target
-    const correct = userSelection.dataset.correct
-    let newDiv = document.createElement("div");
-    newDiv.setAttribute("id", "newDiv");
-    if (correct) {
-        userChoices.appendChild(newDiv)
-        newDiv.textContent = "Correct!"
-        currentQIndex++;
-    } else {
-        userChoices.appendChild(newDiv)
-        newDiv.textContent = "Wrong!"
-        userTime = userTime - deduct;
-        currentQIndex++;
-    }  
-    showQuestion(questionOrder[currentQIndex])
-}
+let currentQIndex = 0;
+let timeLeft = 100;
+let timeControl = 0;
+let deduct = 15;
+let newUl = document.createElement("ul")
 
 const questions = [
     {
         question: "In JavaScript, what element is used to store multiple values in a single variable?",
-        answers: [
-            {text: "Functions", correct: false},
-            {text: "Strings", correct: false},
-            {text: "Variables", correct: false},
-            {text: "Arrays", correct: true}
-        ]
+        answers: ["Functions", "Strings", "Variables", "Arrays"],
+        trueAnswer: "Arrays"
     },
     {
-        question:"What is the type of loop that continues through a block of code as long as the specified condition remains TRUE?",
-        answers: [
-            {text: "Conditional Loop", correct: false},
-            {text: "While Loop", correct: false},
-            {text: "For Loop", correct: true},
-            {text: "Else Loop", correct: false}
-        ]
+        question: "What is the type of loop that continues through a block of code as long as the specified condition remains TRUE?",
+        answers: ["Conditional Loop", "While Loop", "For Loop", "Else Loop"],
+        trueAnswer: "For Loop"
     },
     {
-        question:"Where is the JavaScript placed inside an HTML document or page?", 
-        answers: [
-            {text: "In the <footer> section", correct: false},
-            {text: "In the <title> section", correct: false},
-            {text: "In the <meta> section", correct: false},
-            {text: "In the <body> and <head> sections", correct: true}
-        ]
+        question: "Where is the JavaScript placed inside an HTML document or page?", 
+        answers: ["In the <footer> section", "In the <title> section", "In the <meta> section", "In the <body> and <head> sections"],
+        trueAnswer: "In the <body> and <head> sections"
     },
     {
-        question:"Arrays in JavaScript can be used to store _____.",
-        answers: [ 
-            {text: "Numbers and strings", correct: false},
-            {text: "Other arrays", correct: false},
-            {text: "Booleans", correct: false},
-            {text: "All of the above", correct: true}
-        ]
+        question: "Arrays in JavaScript can be used to store _____.",
+        answers: ["Numbers and strings", "Other arrays", "Booleans", "All of the above"],
+        trueAnswer: "All of the above"
     },
     {
         question: "The condition in an if / else statement is enclosed within _____.",
-        answers: [ 
-            {text: "Quotes", correct: false},
-            {text: "Parantheses", correct: true},
-            {text: "Square brackets", correct: false},
-            {text: "Curly braces", correct: false}
-        ]
+        answers: ["Quotes", "Parantheses", "Square brackets","Curly braces"],
+        trueAnswer: "Parantheses"
     },
     {
         question: "What is a section of code in JavaScript written to complete a task?",
-        answers: [ 
-            {text: "Functions", correct: true},
-            {text: "Strings", correct: false},
-            {text: "Variables", correct: false},
-            {text: "Arrays", correct: false}
-        ]
+        answers: ["Functions", "Strings", "Variables", "Arrays"],
+        trueAnswer: "Functions"
     },
     {
         question:"What does the equation x != z mean?",
-        answers: [
-            {text: "x is equal to z", correct: false},
-            {text: "x is not equal to z", correct: true},
-            {text: "The variable x is being assigned the string z", correct: false},
-            {text: "Add z to x", correct: false}
-        ]
+        answers: ["x is equal to z", "x is not equal to z", "The variable x is being assigned the string z", "Add z to x" ],
+        trueAnswer: "x is not equal to z"
     }
     
 ]
+
+startQuiz.addEventListener("click", function () {
+    if (timeControl === 0) {
+        timeControl = setInterval(() => {
+            timeLeft--;
+            gameTime.textContent = "Time: " + timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timeControl);
+                quizEnd();
+                gameTime.textContent = "The quiz is over!"
+            }
+        }, 1000);
+    }
+    generateQ(currentQIndex);
+});
+
+function generateQ(currentQIndex) {
+    questionSect.innerHTML = "";
+    newUl.innerHTML = "";
+    for (let i = 0; i < questionSect.length; i++) {
+        let presentedQuestion = questions[currentQIndex].question;
+        let presentedChoices = questions[currentQIndex].answers;
+        questionSect.textContent = presentedQuestion;
+    }
+    presentedChoices.forEach(function (newQ){
+        let listEl = document.createElement("li");
+        listEl.textContent = newQ;
+        questionSect.appendChild(newUl)
+        newUl.appendChild(listEl)
+        listEl.addEventListener("click", (answerCheck));
+    })
+}
+
+function answerCheck(event) {
+    let elem = event.target;
+
+    if (elem.matches("li")) {
+        let newDiv = document.createElement("div");
+        newDiv.setAttribute("id", "newDiv");
+        if (elem.textContent == questions[currentQIndex].trueAnswer) {
+            score++;
+            newDiv.textContent = "Correct!"
+        } else {
+            timeLeft = timeLeft - deduct;
+            newDiv.textContent = "Incorrect! The answer was: " + questions[currentQIndex].trueAnswer;
+        }
+    }
+
+    currentQIndex++;
+
+    if (currentQIndex >= questions.length) {
+        quizEnd();
+        newDiv.textContent = "Time's up!" + "Your score was " + score + " out of " + questions.length + "!";
+    } else {
+        generateQ(currentQIndex);
+    }
+    questionSect.appendChild(newDiv);
+}
+
