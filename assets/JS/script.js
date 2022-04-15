@@ -79,12 +79,15 @@ function setStatusClass(element, correct) {
     let newDiv = document.createElement("div");
     newDiv.setAttribute("id", "newDiv");
     if (correct) {
+        userChoices.appendChild(newDiv)
         newDiv.textContent = "Correct!"
+        
     } else {
         userTime = userTime - deduct;
+        userChoices.appendChild(newDiv)
         newDiv.textContent = "Wrong!"
     }
-    userChoices.appendChild(newDiv)
+    
 }
 
 const questions = [
