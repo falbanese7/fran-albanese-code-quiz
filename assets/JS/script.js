@@ -6,7 +6,7 @@ const currentQ = document.getElementById("currentQ");
 const userChoices = document.getElementById("userChoices");
 
 // Time and score variables
-let timeLeft = 25;
+let timeLeft = 50;
 let userTime = 0;
 let deduct = 15; // To penalize user for wrong answer
 let score = 0;
@@ -67,24 +67,16 @@ function resetQuestion() {
 function selectChoice(e) {
     const userSelection = e.target
     const correct = userSelection.dataset.correct
-    setStatusClass(document.body, correct)
-    Array.from(userChoices.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-}
-
-function setStatusClass(element, correct) {
     let newDiv = document.createElement("div");
     newDiv.setAttribute("id", "newDiv");
     if (correct) {
         userChoices.appendChild(newDiv)
         newDiv.textContent = "Correct!"
     } else {
-        userTime = userTime - deduct;
         userChoices.appendChild(newDiv)
         newDiv.textContent = "Wrong!"
+        userTime = userTime - deduct;
     }
-    showQuestion();
 }
 
 const questions = [
