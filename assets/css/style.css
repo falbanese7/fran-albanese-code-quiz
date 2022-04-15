@@ -1,0 +1,37 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.questions-container {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.card {
+    margin: 30vh 41vw; 
+}
+
+a {
+    color: blueviolet;
+}
+
+.btn-purple-custom {
+    background-color: blueviolet;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: contents;
+}
