@@ -40,8 +40,6 @@ function startQuiz() {
 function revealQuestion() {
     resetQuestion()
     showQuestion(questionOrder[currentQIndex])
-    selectChoice()
-
 }
 
 
@@ -81,13 +79,12 @@ function setStatusClass(element, correct) {
     if (correct) {
         userChoices.appendChild(newDiv)
         newDiv.textContent = "Correct!"
-        
     } else {
         userTime = userTime - deduct;
         userChoices.appendChild(newDiv)
         newDiv.textContent = "Wrong!"
     }
-    
+    showQuestion();
 }
 
 const questions = [
