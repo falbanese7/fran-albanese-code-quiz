@@ -1,5 +1,13 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+}
+
+:root {
+    --purple: blueviolet;
+    --white: white;
+    --black: black;
+    --blue: blue;
 }
 
 #container {
@@ -12,23 +20,76 @@
     height: 100vh;
 }
 
+#questionsBox {
+    text-align: center;
+}
+
+h1{
+    font-weight: bold;
+}
+
 a {
-    color: blueviolet;
+    color: var(--purple);
 }
 
 
 .btn-purple-custom {
-    background-color: blueviolet;
-    color: white;
+    background-color: var(--purple);
+    color: var(--white);
     border-radius: 5px;
-    padding: 5px;
+    width: 200px;
+}
+
+#newDiv {
+    margin-top: 25px;
+    border-top: 5px solid lightgray;
+}
+ 
+li {
+    margin: 20px;
+    list-style: none;
+    text-align: center;
+    background-color: var(--purple);
+    margin-right: 45px;
+    line-height: 60px;
+    color: var(--white);
     font-size: 25px;
 }
 
-.hide {
-    display: none;
+li:hover {
+    text-decoration: none;
+    color: var(--black);
 }
 
-.show {
-    display: contents;
+li:active {
+    border: var(--blue);
+    border-style: solid;
+    border-width: 2px;
+}
+
+#score {
+    margin-top: 5px;
+}
+
+#userInput {
+    margin-left: 25px;
+}
+
+#userSubmit {
+    background-color: var(--purple);
+    color: var(--white);
+    border-radius: 5px;
+    width: 200px;
+    margin: 25px;
+}
+
+#userSubmit:hover {
+    text-decoration: none;
+    color: var(--black);
+}
+
+#userSubmit:active {
+    border: var(--blue);
+    border-style: solid;
+    border-width: 2px;
 }
