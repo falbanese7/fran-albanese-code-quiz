@@ -41,7 +41,7 @@ const questions = [
         trueAnswer: "1. Functions"
     },
     {
-        question:"What does the equation x != z mean?",
+        question:"Which of the following describles the equation x != z?",
         answers: ["1. x is equal to z", "2. x is not equal to z", "3. Variable x is being assigned z", "4. Add z to x" ],
         trueAnswer: "2. x is not equal to z"
     }
