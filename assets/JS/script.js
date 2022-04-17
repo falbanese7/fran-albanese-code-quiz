@@ -61,7 +61,7 @@ startQuiz.addEventListener("click", function () {
 // I could have made this an anonymous function in the event listener above specifically when I call the setInterval funciton but I thought this was easier to understand for someone just getting started.
 function oneSecond() {
     timeLeft--; // It will deduct one second from the timeLeft variable so it will act as a timer.
-    gameTime.textContent = "Time: " + timeLeft;
+    gameTime.textContent = "Time remaining: " + timeLeft;
 
     if (timeLeft <= 0) { // If timeLeft is equal to or less than 0, then then we'll stop the timer and call the quizEnd function.
         clearInterval(timeControl);
@@ -165,11 +165,11 @@ function quizEnd() {
            alert("Please enter your initals.");
            return false;
        } else {
-            window.location.replace("./highscores.html"); // Finally the page will navigate to the highscore.html file
+            window.location.replace("./leaderboard.html"); // Finally the page will navigate to the highscore.html file
            ;
        } let scoreList = localStorage.getItem("scoreList"); // This will allow us to read the local storage item.
          if (scoreList === null) {
-             scoreList = []; // Make an empty array for when there are no scores yet.
+             scoreList = [];
          } else {
              scoreList = JSON.parse(scoreList);
          }
