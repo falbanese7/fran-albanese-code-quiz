@@ -2,7 +2,7 @@
 
 Welcome to my code quiz! In this README, below is information about how to use this application.
 
-Live application: https://falbanese96.github.io/fran-albanese-code-quiz/
+Live application: https://falbanese7.github.io/fran-albanese-code-quiz/
 
 ## Start Page
 
